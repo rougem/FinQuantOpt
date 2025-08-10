@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Any
 
 # HARDCODED FIX for Windows - replace with your actual path if needed
-ROOT = r"C:\Users\kkoci\Vanguard\WISER_Optimization_VG"
+ROOT = r"C:\path\to\WISER_Optimization_VG"
 
 class LPFormatConverter:
     """Convert standard LP format to VQE-compatible representation"""
