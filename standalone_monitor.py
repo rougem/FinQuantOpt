@@ -503,7 +503,7 @@ def main():
     EXPERIMENT_ID = 'test'  # Change this to match your experiment
     
     # Option 2: Manual configuration (uncomment and modify if auto-detect fails)
-    # DATA_PATH = "C:/Users/kkoci/Vanguard/WISER_Optimization_VG/data"
+    # DATA_PATH = "C:/path/to/WISER_Optimization_VG/data"
     # EXPERIMENT_ID = 'test'
     
     # Monitoring settings
