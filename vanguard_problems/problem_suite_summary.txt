@@ -1,0 +1,54 @@
+Vanguard Portfolio Optimization Test Suite
+==================================================
+
+Created: 2025-08-10 17:04:27
+Total problems: 8
+
+Problem: mean_variance_31assets_normal_risk1.0
+  Type: mean_variance
+  Assets: 31
+  Classical objective: -0.133331
+  LP file: vanguard_problems\mean_variance_31assets_normal_risk1.0.lp
+
+Problem: mean_variance_31assets_bull_risk0.5
+  Type: mean_variance
+  Assets: 31
+  Classical objective: -0.205012
+  LP file: vanguard_problems\mean_variance_31assets_bull_risk0.5.lp
+
+Problem: mean_variance_31assets_bear_risk2.0
+  Type: mean_variance
+  Assets: 31
+  Classical objective: -0.020770
+  LP file: vanguard_problems\mean_variance_31assets_bear_risk2.0.lp
+
+Problem: index_tracking_31assets_te0.02
+  Type: index_tracking
+  Assets: 31
+  Classical objective: 0.000000
+  LP file: vanguard_problems\index_tracking_31assets_te0.02.lp
+
+Problem: esg_constrained_31assets_esg7.0
+  Type: esg_constrained
+  Assets: 31
+  Classical objective: 0.009097
+  LP file: vanguard_problems\esg_constrained_31assets_esg7.0.lp
+
+Problem: mean_variance_109assets_normal_risk1.0
+  Type: mean_variance
+  Assets: 109
+  Classical objective: -0.164016
+  LP file: vanguard_problems\mean_variance_109assets_normal_risk1.0.lp
+
+Problem: index_tracking_109assets_te0.015
+  Type: index_tracking
+  Assets: 109
+  Classical objective: 0.000000
+  LP file: vanguard_problems\index_tracking_109assets_te0.015.lp
+
+Problem: mean_variance_155assets_normal_risk1.0
+  Type: mean_variance
+  Assets: 155
+  Classical objective: -0.187358
+  LP file: vanguard_problems\mean_variance_155assets_normal_risk1.0.lp
+
