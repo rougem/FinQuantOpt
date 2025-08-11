@@ -2,15 +2,15 @@
 
 ## Project Overview & Results Summary
 
-### ✅ What Was Accomplished
+### What Was Accomplished
 - **Hybrid Quantum-Classical Portfolio Optimization System** with 0.25% quantum vs classical gap
 - **8 Realistic Portfolio Problems Generated** (ESG, index tracking, mean-variance)
 - **Professional Real-Time Monitoring Dashboard** with 6-panel visualization
 - **Working Format Converter** for GUROBI → VQE compatibility
 - **Complete End-to-End Pipeline** from problem generation to results analysis
-- **1400+ Lines of Original Code** across 4 major components
+- **approx. 700 Lines of Original Code** across 4 major components
 
-### 🔬 **VQE Implementation Analysis: Custom vs Standard Approach**
+### **VQE Implementation Analysis: Custom vs Standard Approach**
 
 #### What This System Actually Implements
 This project uses a **VQE-inspired hybrid quantum optimization** approach rather than the standard textbook VQE algorithm. Here's the technical comparison:
@@ -52,7 +52,7 @@ result = he.run()  # Direct cost minimization
 
 ### **Key Technical Differences:**
 
-| Aspect | Standard VQE | This Project's Approach | Advantage |
+| Aspect | Standard VQE | This Project's Approach | This Projects Advantage |
 |--------|-------------|------------------------|-----------|
 | **Problem Formulation** | Hamiltonian with Pauli operators | Direct objective function from LP files | ✅ More practical for portfolio problems |
 | **Cost Function** | Expectation value ⟨ψ\|H\|ψ⟩ | Direct evaluation obj_fn(x) | ✅ Avoids complex Hamiltonian encoding |
@@ -74,7 +74,7 @@ This implementation is best described as **"QAOA-inspired Portfolio Optimization
 - **VQE-inspired**: Parameterized quantum circuits with classical optimization
 - **Portfolio-specific**: Tailored for binary allocation problems
 
-### ⚠️ Scaling Limitation Identified
+###  Scaling Limitation Identified
 **Issue**: VQE system encounters "Number of qubits is zero; cannot build ansatz" error when attempting to scale beyond 31 assets.
 
 **Root Cause**: The quantum circuit ansatz builder has difficulty with larger problem sizes due to:
@@ -228,7 +228,7 @@ Copy-Item data\1\31bonds\docplex-bin-avgonly-nocplexvars.lp vanguard_problems\wo
 ## Directory Structure & File Locations
 
 ```
-C:\Users\kkoci\Vanguard\WISER_Optimization_VG\
+C:\path	o\WISER_Optimization_VG\
 ├── _experiments\                          # Main execution environment
 │   ├── sbo_steps1to3.py                  # VQE execution script
 │   ├── sbo_step4.py                      # Post-processing (local search)
@@ -276,7 +276,7 @@ C:\Users\kkoci\Vanguard\WISER_Optimization_VG\
 #### PowerShell Commands:
 ```powershell
 # Navigate to project directory
-cd C:\Users\kkoci\Vanguard\WISER_Optimization_VG
+cd C:\path	o\WISER_Optimization_VG
 
 # Activate virtual environment
 .\vanguard\Scripts\Activate.ps1
@@ -820,7 +820,7 @@ ModuleNotFoundError: No module named 'src.step_1'
 **Solution (PowerShell)**:
 ```powershell
 # Ensure correct working directory
-cd C:\Users\kkoci\Vanguard\WISER_Optimization_VG
+cd C:\path	o\WISER_Optimization_VG
 
 # Verify Python path
 python -c "import sys; print(sys.path)"
@@ -922,7 +922,7 @@ This project demonstrates:
 ### PowerShell Commands Summary:
 ```powershell
 # Project setup
-cd C:\Users\kkoci\Vanguard\WISER_Optimization_VG
+cd C:\path	o\WISER_Optimization_VG
 .\vanguard\Scripts\Activate.ps1
 
 # Generate problems
