@@ -61,6 +61,59 @@ result = he.run()  # Direct cost minimization
 | **Qiskit Integration** | Uses qiskit.algorithms.VQE | Custom quantum-classical loop | 🔧 More flexible but requires custom implementation |
 | **Binary Problems** | Requires careful encoding | Natural binary decision variables | ✅ Perfect fit for portfolio allocation |
 
+Theory and explanation: 
+
+Constraint Handling in Quantum Portfolio Optimization
+In classical optimization (like Gurobi), constraints are handled directly in the model. But in quantum optimization—especially when using VQE—we often need to embed constraints into the cost function using penalty terms. Here's what each method means:
+
+1. Penalty Terms in the Hamiltonian
+In quantum optimization, we encode the problem as a Hamiltonian (a quantum operator).
+
+Constraints (like budget limits or exposure caps) are added as penalty terms to the Hamiltonian.
+
+These penalties increase the energy of invalid solutions, so VQE avoids them.
+
+Example:
+
+𝐻 = Risk Term
+−
+Return Term
++
+𝑃
+(
+∑
+𝑥
+𝑖
+−
+𝐵
+)
+2
+where 
+𝑃
+ is a penalty coefficient and 
+𝐵
+ is the budget.
+
+2. Penalty Method in Objective Function
+This is the classical version of the same idea.
+
+Instead of enforcing constraints strictly, we add penalty terms to the objective function.
+
+These terms discourage violations but don’t prevent them outright.
+
+It’s a flexible way to guide the optimizer toward feasible solutions.
+
+3. Standard Optimization Practice
+Using penalties to handle constraints is a well-established method in both classical and quantum optimization.
+
+It’s especially useful when direct constraint enforcement is hard (like in quantum circuits).
+
+The key is choosing the right penalty strength: too low, and constraints are ignored; too high, and optimization becomes unstable.
+
+Why This Matters for VQE
+In the FinQuantOpt project, constraints like “select exactly 5 bonds” or “stay within a risk threshold” are embedded into the cost function using penalty terms. This allows VQE to search freely across quantum states while still favoring valid portfolios.
+
+
 ### **Why This Approach Works Better for Portfolio Optimization:**
 
 1. **Direct Problem Mapping**: Portfolio allocation is naturally binary (buy/don't buy), no complex Hamiltonian encoding needed
@@ -73,6 +126,39 @@ This implementation is best described as **"QAOA-inspired Portfolio Optimization
 - **QAOA-like**: Direct cost function optimization
 - **VQE-inspired**: Parameterized quantum circuits with classical optimization
 - **Portfolio-specific**: Tailored for binary allocation problems
+
+  1. QAOA-like: Direct Cost Function Optimization
+This refers to an approach inspired by the Quantum Approximate Optimization Algorithm (QAOA), where the optimization is performed directly on a cost function without converting it into a formal Hamiltonian using Pauli operators.
+
+In QAOA, you define a cost function (e.g., portfolio risk-return tradeoff) and build a quantum circuit that approximates the optimal solution.
+
+The circuit is parameterized, and classical optimization is used to tune those parameters to minimize the cost.
+
+In FinQuantOpt, this is done by converting the LP model directly into an objective function and optimizing it without explicitly constructing a Hamiltonian.
+
+Why it matters: This method is more practical for financial problems, where constraints and objectives are already defined in LP format. It avoids the complexity of mapping everything into quantum operators.
+
+2. VQE-inspired: Parameterized Quantum Circuits with Classical Optimization
+This approach draws from the Variational Quantum Eigensolver (VQE), a hybrid algorithm that uses quantum circuits to prepare trial states and classical optimizers to minimize the expected value of a Hamiltonian.
+
+In standard VQE, you convert your problem into a Hamiltonian and use a quantum circuit (ansatz) to explore possible solutions.
+
+The circuit is parameterized (e.g., using rotation gates), and a classical optimizer adjusts those parameters to find the lowest energy state.
+
+FinQuantOpt uses this idea but skips the Hamiltonian conversion. Instead, it applies classical optimization directly to the cost function using a quantum-inspired circuit.
+
+Why it matters: This hybrid method is well-suited for noisy intermediate-scale quantum (NISQ) devices and allows for flexible modeling of financial problems.
+
+3. Portfolio-specific: Tailored for Binary Allocation Problems
+This means the optimization framework is customized for portfolio selection problems, where each asset is either included or excluded—represented as binary decisions.
+
+In finance, portfolio optimization often involves selecting a subset of assets under constraints (e.g., budget, risk exposure).
+
+These binary decisions (invest or not) map naturally to qubits in a quantum circuit.
+
+The FinQuantOpt system is designed specifically to handle these kinds of problems, using binary variables and constraint-aware cost functions.
+
+Why it matters: Tailoring the algorithm to binary allocation makes it more efficient and relevant for real-world portfolio construction tasks, especially when dealing with large asset sets and complex constraints.
 
 ###  Scaling Limitation Identified
 **Issue**: VQE system encounters "Number of qubits is zero; cannot build ansatz" error when attempting to scale beyond 31 assets.
