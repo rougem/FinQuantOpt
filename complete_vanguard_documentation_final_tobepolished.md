@@ -1,4 +1,4 @@
-# Complete Vanguard VQE Portfolio Optimization - Final Documentation
+# Complete VQE Portfolio Optimization - Final Documentation
 
 ## Project Overview & Results Summary
 
@@ -216,8 +216,8 @@ Why it matters: Tailoring the algorithm to binary allocation makes it more effic
 **Implementation**:
 ```powershell
 # Pragmatic solution: Use proven working template
-Copy-Item data\1\31bonds\docplex-bin-avgonly.lp vanguard_problems\working_portfolio.lp
-Copy-Item data\1\31bonds\docplex-bin-avgonly-nocplexvars.lp vanguard_problems\working_portfolio-nocplexvars.lp
+Copy-Item data\1\31bonds\docplex-bin-avgonly.lp wiser_problems\working_portfolio.lp
+Copy-Item data\1\31bonds\docplex-bin-avgonly-nocplexvars.lp wiser_problems\working_portfolio-nocplexvars.lp
 ```
 
 **Trade-off**: Lost custom portfolio problem specifics but gained reliability
@@ -332,7 +332,7 @@ C:\path	o\WISER_Optimization_VG\
 │       ├── exp0.pkl                      # Main experiment results
 │       ├── isa_ansatz.qpy               # Optimized quantum circuit
 │       └── working_portfolio_test_*.pkl  # Iteration results
-├── vanguard_problems\                    # 📊 Generated portfolio problems
+├── wiser_problems\                    # 📊 Generated portfolio problems
 │   ├── mean_variance_31assets_normal_risk1.0.lp    # 31-asset mean-variance
 │   ├── mean_variance_109assets_normal_risk1.0.lp   # 109-asset (format issues)
 │   ├── mean_variance_155assets_normal_risk1.0.lp   # 155-asset (format issues)
@@ -365,7 +365,7 @@ C:\path	o\WISER_Optimization_VG\
 cd C:\path	o\WISER_Optimization_VG
 
 # Activate virtual environment
-.\vanguard\Scripts\Activate.ps1
+.\wiser\Scripts\Activate.ps1
 
 # Verify Python packages
 python -c "import qiskit, gurobipy, docplex; print('All packages installed')"
@@ -374,7 +374,7 @@ python -c "import qiskit, gurobipy, docplex; print('All packages installed')"
 #### Bash Equivalent:
 ```bash
 # Navigate to project directory
-cd /c/Users/kkoci/Vanguard/WISER_Optimization_VG
+cd /c/Users/kkoci/wiser/WISER_Optimization_VG
 
 # Activate virtual environment
 source vanguard/Scripts/activate
@@ -397,11 +397,11 @@ python -c "import qiskit, gurobipy, docplex; print('All packages installed')"
 python portfolio_generator.py
 
 # Verify generation
-dir vanguard_problems\*.lp
+dir wiser_problems\*.lp
 # Expected: 8 .lp files + 8 .pkl metadata files
 
 # Check summary
-Get-Content vanguard_problems\problem_suite_summary.txt
+Get-Content wiser_problems\problem_suite_summary.txt
 ```
 
 #### Bash Equivalent:
@@ -410,11 +410,11 @@ Get-Content vanguard_problems\problem_suite_summary.txt
 python portfolio_generator.py
 
 # Verify generation
-ls vanguard_problems/*.lp
+ls wiser_problems/*.lp
 # Expected: 8 .lp files + 8 .pkl metadata files
 
 # Check summary
-cat vanguard_problems/problem_suite_summary.txt
+cat wiser_problems/problem_suite_summary.txt
 ```
 
 #### Generated Files:
@@ -438,11 +438,11 @@ cat vanguard_problems/problem_suite_summary.txt
 #### PowerShell Commands:
 ```powershell
 # Step 1: Create working portfolio from template
-Copy-Item data\1\31bonds\docplex-bin-avgonly.lp vanguard_problems\working_portfolio.lp
-Copy-Item data\1\31bonds\docplex-bin-avgonly-nocplexvars.lp vanguard_problems\working_portfolio-nocplexvars.lp
+Copy-Item data\1\31bonds\docplex-bin-avgonly.lp wiser_problems\working_portfolio.lp
+Copy-Item data\1\31bonds\docplex-bin-avgonly-nocplexvars.lp wiser_problems\working_portfolio-nocplexvars.lp
 
 # Step 2: Verify files created
-dir vanguard_problems\working_portfolio*
+dir wiser_problems\working_portfolio*
 # Expected: 2 files (with and without -nocplexvars)
 
 # Step 3: Navigate to experiments directory
@@ -450,7 +450,7 @@ cd _experiments
 
 # Step 4: Edit doe.py - Add this configuration:
 # 'manual/working_portfolio': {
-#     'lp_file': f'{ROOT}/vanguard_problems/working_portfolio.lp',
+#     'lp_file': f'{ROOT}/wiser_problems/working_portfolio.lp',
 #     'experiment_id': 'working_portfolio_test',
 #     'num_exec': 1,
 #     'ansatz': 'TwoLocal',
@@ -476,11 +476,11 @@ python sbo_steps1to3.py
 #### Bash Equivalent:
 ```bash
 # Step 1: Create working portfolio from template
-cp data/1/31bonds/docplex-bin-avgonly.lp vanguard_problems/working_portfolio.lp
-cp data/1/31bonds/docplex-bin-avgonly-nocplexvars.lp vanguard_problems/working_portfolio-nocplexvars.lp
+cp data/1/31bonds/docplex-bin-avgonly.lp wiser_problems/working_portfolio.lp
+cp data/1/31bonds/docplex-bin-avgonly-nocplexvars.lp wiser_problems/working_portfolio-nocplexvars.lp
 
 # Step 2: Verify files created
-ls vanguard_problems/working_portfolio*
+ls wiser_problems/working_portfolio*
 
 # Step 3: Navigate to experiments directory
 cd _experiments
@@ -515,7 +515,7 @@ data\1\31bonds\working_portfolio_test\
 #### PowerShell Commands:
 ```powershell
 # Step 1: Convert custom portfolio problem
-python quick_fix_converter_2.py vanguard_problems\mean_variance_31assets_normal_risk1.0.lp
+python quick_fix_converter_2.py wiser_problems\mean_variance_31assets_normal_risk1.0.lp
 
 # Expected output:
 # ✅ Conversion complete: X constraints, Y variables
@@ -539,7 +539,7 @@ python sbo_steps1to3.py
 #### Bash Equivalent:
 ```bash
 # Step 1: Convert custom portfolio problem
-python quick_fix_converter_2.py vanguard_problems/mean_variance_31assets_normal_risk1.0.lp
+python quick_fix_converter_2.py wiser_problems/mean_variance_31assets_normal_risk1.0.lp
 
 # Step 2: Create -nocplexvars version
 cp "converted_problems/mean_variance_31assets_normal_risk1.0_converted.lp" "converted_problems/mean_variance_31assets_normal_risk1.0_converted-nocplexvars.lp"
@@ -753,7 +753,7 @@ This implementation represents a **practical quantum optimization approach** tai
 #### Working Template Configuration:
 ```python
 'manual/working_portfolio': {
-    'lp_file': f'{ROOT}/vanguard_problems/working_portfolio.lp',
+    'lp_file': f'{ROOT}/wiser_problems/working_portfolio.lp',
     'experiment_id': 'working_portfolio_test',
     'num_exec': 1,                    # Number of independent runs
     'ansatz': 'TwoLocal',             # Quantum circuit ansatz
@@ -990,7 +990,7 @@ python -c "import sys; print(sys.path)"
 4. **Memory Requirements**: Large problems exceed current system capabilities
 5. **Non-Standard Implementation**: Custom framework vs standard Qiskit VQE
 
-### Value Proposition for Vanguard 🎯
+### Value Proposition for Wiser 🎯
 This project demonstrates:
 - **Practical quantum applications** for portfolio management
 - **Framework scalability** for future quantum hardware
@@ -1009,14 +1009,14 @@ This project demonstrates:
 ```powershell
 # Project setup
 cd C:\path	o\WISER_Optimization_VG
-.\vanguard\Scripts\Activate.ps1
+.\wiser\Scripts\Activate.ps1
 
 # Generate problems
 python portfolio_generator.py
 
 # Setup working portfolio
-Copy-Item data\1\31bonds\docplex-bin-avgonly.lp vanguard_problems\working_portfolio.lp
-Copy-Item data\1\31bonds\docplex-bin-avgonly-nocplexvars.lp vanguard_problems\working_portfolio-nocplexvars.lp
+Copy-Item data\1\31bonds\docplex-bin-avgonly.lp wiser_problems\working_portfolio.lp
+Copy-Item data\1\31bonds\docplex-bin-avgonly-nocplexvars.lp wiser_problems\working_portfolio-nocplexvars.lp
 
 # Run VQE
 cd _experiments
@@ -1029,21 +1029,21 @@ python ..\standalone_monitor.py
 python sbo_step4.py
 
 # Convert custom formats (advanced)
-python ..\quick_fix_converter_2.py vanguard_problems\mean_variance_31assets_normal_risk1.0.lp
+python ..\quick_fix_converter_2.py wiser_problems\mean_variance_31assets_normal_risk1.0.lp
 ```
 
 ### Bash Equivalent Commands:
 ```bash
 # Project setup  
-cd /c/Users/kkoci/Vanguard/WISER_Optimization_VG
+cd /c/Users/kkoci/wiser/WISER_Optimization_VG
 source vanguard/Scripts/activate
 
 # Generate problems
 python portfolio_generator.py
 
 # Setup working portfolio
-cp data/1/31bonds/docplex-bin-avgonly.lp vanguard_problems/working_portfolio.lp
-cp data/1/31bonds/docplex-bin-avgonly-nocplexvars.lp vanguard_problems/working_portfolio-nocplexvars.lp
+cp data/1/31bonds/docplex-bin-avgonly.lp wiser_problems/working_portfolio.lp
+cp data/1/31bonds/docplex-bin-avgonly-nocplexvars.lp wiser_problems/working_portfolio-nocplexvars.lp
 
 # Run VQE
 cd _experiments
@@ -1056,7 +1056,7 @@ python ../standalone_monitor.py
 python sbo_step4.py
 
 # Convert custom formats (advanced)
-python ../quick_fix_converter_2.py vanguard_problems/mean_variance_31assets_normal_risk1.0.lp
+python ../quick_fix_converter_2.py wiser_problems/mean_variance_31assets_normal_risk1.0.lp
 ```
 
 ---
